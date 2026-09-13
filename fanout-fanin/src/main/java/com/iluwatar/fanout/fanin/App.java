@@ -26,11 +26,7 @@ package com.iluwatar.fanout.fanin;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
-
 import lombok.extern.slf4j.Slf4j;
-
-
 
 /**
  * FanOut/FanIn pattern is a concurrency pattern that refers to executing multiple instances of the
@@ -62,7 +58,7 @@ public class App {
     LOGGER.info("Numbers to be squared and get sum --> {}", numbers);
 
     final List<SquareNumberRequest> requests =
-        numbers.stream().map(SquareNumberRequest::new).collect(Collectors.toList());
+        numbers.stream().map(SquareNumberRequest::new).toList();
 
     var consumer = new Consumer(0L);
 

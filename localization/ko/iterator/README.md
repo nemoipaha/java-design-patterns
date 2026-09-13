@@ -1,8 +1,9 @@
 ---
 title: Iterator
+shortTitle: Iterator
 categories: Behavioral
 language: ko
-tags:
+tag:
 - Gang of Four
 ---
 
@@ -123,7 +124,7 @@ Ring of armor
 
 ## 클래스 다이어그램
 
-![alt text](../../../iterator/etc/iterator_1.png "Iterator")
+![alt text](./etc/iterator_1.png "Iterator")
 
 ## 적용 가능성
 

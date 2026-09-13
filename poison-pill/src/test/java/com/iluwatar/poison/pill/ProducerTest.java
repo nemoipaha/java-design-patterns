@@ -27,27 +27,22 @@ package com.iluwatar.poison.pill;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.fail;
-import static org.mockito.Matchers.eq;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
-import static org.mockito.Mockito.verifyZeroInteractions;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 
-/**
- * Date: 12/27/15 - 10:32 PM
- *
- * @author Jeroen Meulemeester
- */
+/** ProducerTest */
 class ProducerTest {
 
   @Test
   void testSend() throws Exception {
     final var publishPoint = mock(MqPublishPoint.class);
     final var producer = new Producer("producer", publishPoint);
-    verifyZeroInteractions(publishPoint);
+    verifyNoMoreInteractions(publishPoint);
 
     producer.send("Hello!");
 
@@ -67,7 +62,7 @@ class ProducerTest {
   void testStop() throws Exception {
     final var publishPoint = mock(MqPublishPoint.class);
     final var producer = new Producer("producer", publishPoint);
-    verifyZeroInteractions(publishPoint);
+    verifyNoMoreInteractions(publishPoint);
 
     producer.stop();
     verify(publishPoint).put(eq(Message.POISON_PILL));
@@ -78,11 +73,11 @@ class ProducerTest {
     } catch (IllegalStateException e) {
       assertNotNull(e);
       assertNotNull(e.getMessage());
-      assertEquals("Producer Hello! was stopped and fail to deliver requested message [producer].",
+      assertEquals(
+          "Producer Hello! was stopped and fail to deliver requested message [producer].",
           e.getMessage());
     }
 
     verifyNoMoreInteractions(publishPoint);
   }
-
 }
